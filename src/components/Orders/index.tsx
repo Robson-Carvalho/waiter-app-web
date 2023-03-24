@@ -1,64 +1,13 @@
-import { Container, Board, OrderContainer } from "./styles";
+import { Container } from "./styles";
+
+import { OrdersBoard } from "../OrdersBoard";
 
 export const Orders = () => {
   return (
     <Container>
-      <Board>
-        <header>
-          <span>🕒</span>
-          <strong>Fila de espera</strong>
-          <span>(1)</span>
-        </header>
-
-        <OrderContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-        </OrderContainer>
-      </Board>
-
-      <Board>
-        <header>
-          <span>👨‍🍳</span>
-          <strong>Em produção</strong>
-          <span>(1)</span>
-        </header>
-
-        <OrderContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-        </OrderContainer>
-      </Board>
-
-      <Board>
-        <header>
-          <span>✅</span>
-          <strong>Pronto!</strong>
-          <span>(1)</span>
-        </header>
-
-        <OrderContainer>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-          <button type="button">
-            <strong>Mesa 2</strong>
-            <span>2 itens</span>
-          </button>
-        </OrderContainer>
-      </Board>
+      <OrdersBoard icon="🕒" title="Fila de espera" />
+      <OrdersBoard icon="👨‍🍳" title="Em preparação" />
+      <OrdersBoard icon="✅" title="Pronto!" />
     </Container>
   );
 };
