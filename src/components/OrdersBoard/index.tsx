@@ -1,29 +1,31 @@
+import { Order } from "../../types/Order";
 import { Board, OrderContainer } from "./styles";
 
 interface OrdersBoardProps {
   icon: string;
   title: string;
+  orders: Order[];
 }
 
-export const OrdersBoard = ({ icon, title }: OrdersBoardProps) => {
+export const OrdersBoard = ({ icon, title, orders }: OrdersBoardProps) => {
   return (
     <Board>
       <header>
         <span>{icon}</span>
         <strong>{title}</strong>
-        <span>(1)</span>
+        <span>({orders.length})</span>
       </header>
 
-      <OrderContainer>
-        <button type="button">
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-        <button type="button">
-          <strong>Mesa 2</strong>
-          <span>2 itens</span>
-        </button>
-      </OrderContainer>
+      {orders.length >= 0 && (
+        <OrderContainer>
+          {orders.map(({ _id, table, products }) => (
+            <button type="button" key={_id}>
+              <strong>{table}</strong>
+              <span>{products.length} itens</span>
+            </button>
+          ))}
+        </OrderContainer>
+      )}
     </Board>
   );
 };
