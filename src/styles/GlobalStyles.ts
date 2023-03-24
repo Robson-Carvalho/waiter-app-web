@@ -41,6 +41,10 @@ export const GlobalStyles = createGlobalStyle`
           url('${GeneralSansSemiboldTtf}') format('truetype');
   }
 
+  html{
+    scroll-behavior: smooth;
+  }
+
   * {
     margin: 0;
     padding: 0;
