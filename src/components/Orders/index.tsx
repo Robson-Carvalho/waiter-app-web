@@ -4,29 +4,19 @@ import { OrdersBoard } from "../OrdersBoard";
 
 const orders: Order[] = [
   {
-    _id: "641cc98425438d3ee0fdd5de",
-    table: "123",
+    _id: "641f04fc48fe98e1588e9998",
+    table: "1",
     status: "WAITING",
     products: [
       {
         product: {
-          name: "Pizza quatro queijos",
-
-          imagePath: "1679597867247-quatro-queijos.png",
-          price: 40,
-        },
-        quantity: 3,
-        _id: "641cc98425438d3ee0fdd5df",
-      },
-      {
-        product: {
-          name: "Coca cola",
+          name: "Coca Cola",
 
           imagePath: "1679605949703-coca-cola.png",
           price: 7,
         },
-        quantity: 3,
-        _id: "641cc98425438d3ee0fdd5e0",
+        quantity: 2,
+        _id: "641f04fc48fe98e1588e9999",
       },
     ],
   },

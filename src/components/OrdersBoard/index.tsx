@@ -1,6 +1,9 @@
 import { Order } from "../../types/Order";
 import { Board, OrderContainer } from "./styles";
 
+import { OrderModal } from "../OrderModal";
+import { useState } from "react";
+
 interface OrdersBoardProps {
   icon: string;
   title: string;
@@ -8,8 +11,27 @@ interface OrdersBoardProps {
 }
 
 export const OrdersBoard = ({ icon, title, orders }: OrdersBoardProps) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<null | Order>(null);
+
+  const handleOpenModal = () => {
+    setIsModalVisible(!isModalVisible);
+
+    if (!isModalVisible) {
+      handleSelectOrder(null);
+    }
+  };
+
+  const handleSelectOrder = (order: Order | null) => {
+    setSelectedOrder(order);
+  };
+
   return (
     <Board>
+      {isModalVisible && (
+        <OrderModal order={selectedOrder} handleOpenModal={handleOpenModal} />
+      )}
+
       <header>
         <span>{icon}</span>
         <strong>{title}</strong>
@@ -18,10 +40,16 @@ export const OrdersBoard = ({ icon, title, orders }: OrdersBoardProps) => {
 
       {orders.length >= 0 && (
         <OrderContainer>
-          {orders.map(({ _id, table, products }) => (
-            <button type="button" key={_id}>
-              <strong>{table}</strong>
-              <span>{products.length} itens</span>
+          {orders.map((order) => (
+            <button
+              type="button"
+              key={order._id}
+              onClick={() => {
+                handleOpenModal(), handleSelectOrder(order);
+              }}
+            >
+              <strong>{order.table}</strong>
+              <span>{order.products.length} itens</span>
             </button>
           ))}
         </OrderContainer>
