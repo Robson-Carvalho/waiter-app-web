@@ -20,37 +20,43 @@
 
 Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-- [Node.Js](https://nodejs.org/en)
-- [Express.Js](https://expressjs.com/)
-- [Multer](https://www.npmjs.com/package/multer)
+- [ReactJs](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Mongoose](https://mongoosejs.com/)
-- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Styled-Components](https://styled-components.com/)
+- [ViteJs](https://vitejs.dev/)
+- [Git](https://git-scm.com/)
 
 ## 🚀 Executando projeto
 
-Clone o projeto e acesse a pasta.
+Clone o projeto.
 
 ```bash
-git clone https://github.com/Robson-Carvalho/waiter-app-api.git
+git clone https://github.com/Robson-Carvalho/waiter-app-web.git
+```
+
+Acesse a pasta do projeto clonado.
+
+```bash
 cd waiter-app-web
 ```
 
-Execute estes comandos para instalar as dependências e rodar o projeto.
+Execute o comando abaixo para baixar as dependências do projeto.
 
 ```bash
 npm install
 ```
 
+Execute o comando abaixo para rodar o projeto.
+
 ```
 npm run dev
 ```
 
-## 📖 Descrição
+## 📖 Descrição do projeto
 
 O Waiter App Web é um projeto desenvolvido em React com TypeScript que tem como objetivo oferecer uma solução para gerenciamento de pedidos e mesas em restaurantes. O aplicativo é construído com tecnologias modernas e é escalável para atender as necessidades de diferentes tipos de restaurantes.
 
-## 📝 License
+## 📝 Licença
 
 Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
 
