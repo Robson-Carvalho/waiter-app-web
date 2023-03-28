@@ -52,7 +52,7 @@ O Waiter App Web é um projeto desenvolvido em React com TypeScript que tem como
 
 ## 📝 License
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE.md) para mais detalhes.
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](./LICENSE) para mais detalhes.
 
 ---
 
