@@ -8,9 +8,20 @@ import { useEffect } from "react";
 interface OrderModalProps {
   order: null | Order;
   handleOpenModal: () => void;
+  isLoading: boolean;
+  onCancelOrder: () => void;
+  onDeleteCompletedOrder: () => void;
+  onChangeOrderStatus: () => void;
 }
 
-export const OrderModal = ({ order, handleOpenModal }: OrderModalProps) => {
+export const OrderModal = ({
+  order,
+  handleOpenModal,
+  isLoading,
+  onCancelOrder,
+  onChangeOrderStatus,
+  onDeleteCompletedOrder,
+}: OrderModalProps) => {
   const total: number | any = order?.products.reduce(
     (acc, { product: { price }, quantity }) => {
       return acc + price * quantity;
@@ -87,12 +98,34 @@ export const OrderModal = ({ order, handleOpenModal }: OrderModalProps) => {
         </OrderDetails>
 
         <Actions>
-          <button type="button" className="primary">
-            <span>👨‍🍳</span>
-            <strong>Iniciar Produção</strong>
-          </button>
-          <button type="button" className="secondary">
-            Cancelar pedido
+          {order?.status !== "DONE" && (
+            <button
+              type="button"
+              className="primary"
+              disabled={isLoading}
+              onClick={onChangeOrderStatus}
+            >
+              <span>
+                {order?.status === "WAITING" && "👨‍🍳"}
+                {order?.status === "IN_PRODUCTION" && "✅"}
+              </span>
+              <strong>
+                {order?.status === "WAITING" && "Iniciar Produção"}
+                {order?.status === "IN_PRODUCTION" && "Concluir Pedido"}
+              </strong>
+            </button>
+          )}
+          <button
+            type="button"
+            className="secondary"
+            onClick={
+              order?.status === "DONE" ? onDeleteCompletedOrder : onCancelOrder
+            }
+            disabled={isLoading}
+          >
+            {order?.status !== "DONE"
+              ? "Cancelar pedido"
+              : "Remover pedido concluido"}
           </button>
         </Actions>
       </ModalBody>
