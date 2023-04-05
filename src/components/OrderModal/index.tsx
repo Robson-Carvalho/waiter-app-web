@@ -8,9 +8,16 @@ import { useEffect } from "react";
 interface OrderModalProps {
   order: null | Order;
   handleOpenModal: () => void;
+  isLoading: boolean;
+  onCancelOrder: () => void;
 }
 
-export const OrderModal = ({ order, handleOpenModal }: OrderModalProps) => {
+export const OrderModal = ({
+  order,
+  handleOpenModal,
+  isLoading,
+  onCancelOrder,
+}: OrderModalProps) => {
   const total: number | any = order?.products.reduce(
     (acc, { product: { price }, quantity }) => {
       return acc + price * quantity;
@@ -87,11 +94,16 @@ export const OrderModal = ({ order, handleOpenModal }: OrderModalProps) => {
         </OrderDetails>
 
         <Actions>
-          <button type="button" className="primary">
+          <button type="button" className="primary" disabled={isLoading}>
             <span>👨‍🍳</span>
             <strong>Iniciar Produção</strong>
           </button>
-          <button type="button" className="secondary">
+          <button
+            type="button"
+            className="secondary"
+            onClick={onCancelOrder}
+            disabled={isLoading}
+          >
             Cancelar pedido
           </button>
         </Actions>

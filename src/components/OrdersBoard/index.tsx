@@ -3,16 +3,24 @@ import { Board, OrderContainer } from "./styles";
 
 import { OrderModal } from "../OrderModal";
 import { useState } from "react";
+import { api } from "../../utils/api";
 
 interface OrdersBoardProps {
   icon: string;
   title: string;
   orders: Order[];
+  onCancelOrder: (orderId: string) => void;
 }
 
-export const OrdersBoard = ({ icon, title, orders }: OrdersBoardProps) => {
+export const OrdersBoard = ({
+  icon,
+  title,
+  orders,
+  onCancelOrder,
+}: OrdersBoardProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<null | Order>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenModal = () => {
     setIsModalVisible(!isModalVisible);
@@ -26,10 +34,24 @@ export const OrdersBoard = ({ icon, title, orders }: OrdersBoardProps) => {
     setSelectedOrder(order);
   };
 
+  const handleCancelOrder = async () => {
+    setIsLoading(true);
+    await api.delete(`/orders/${selectedOrder?._id}`);
+
+    onCancelOrder(selectedOrder!._id);
+    setIsLoading(false);
+    setIsModalVisible(false);
+  };
+
   return (
     <Board>
       {isModalVisible && (
-        <OrderModal order={selectedOrder} handleOpenModal={handleOpenModal} />
+        <OrderModal
+          isLoading={isLoading}
+          order={selectedOrder}
+          handleOpenModal={handleOpenModal}
+          onCancelOrder={handleCancelOrder}
+        />
       )}
 
       <header>
