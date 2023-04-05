@@ -75,7 +75,7 @@ export const OrderModal = ({
             {order?.products.map(({ _id, product, quantity }) => (
               <div className="item" key={_id}>
                 <img
-                  src={`http://localhost:3001/${product.imagePath}`}
+                  src={`https://waiter-app-api.vercel.app//${product.imagePath}`}
                   alt={product.name}
                   width="48"
                   height="28.51"

@@ -67,6 +67,8 @@ export const OrdersBoard = ({
     toast.success(
       `O pedido finalizado da mesa ${selectedOrder?.table} foi removido da lista!`
     );
+    onCancelOrder(selectedOrder!._id);
+    setIsModalVisible(false);
   };
 
   return (
