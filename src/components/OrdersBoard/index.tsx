@@ -11,6 +11,7 @@ interface OrdersBoardProps {
   title: string;
   orders: Order[];
   onCancelOrder: (orderId: string) => void;
+  onChangeOrderStatus: (orderId: string, status: Order["status"]) => void;
 }
 
 export const OrdersBoard = ({
@@ -18,6 +19,7 @@ export const OrdersBoard = ({
   title,
   orders,
   onCancelOrder,
+  onChangeOrderStatus,
 }: OrdersBoardProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<null | Order>(null);
@@ -35,6 +37,22 @@ export const OrdersBoard = ({
     setSelectedOrder(order);
   };
 
+  const handleChangeOrderStatus = async () => {
+    setIsLoading(true);
+
+    const status =
+      selectedOrder?.status === "WAITING" ? "IN_PRODUCTION" : "DONE";
+
+    await api.patch(`/orders/${selectedOrder?._id}`, { status });
+
+    toast.success(
+      `O status do pedido da mesa ${selectedOrder?.table} foi alterado!`
+    );
+    onChangeOrderStatus(selectedOrder!._id, status);
+    setIsLoading(false);
+    setIsModalVisible(false);
+  };
+
   const handleCancelOrder = async () => {
     setIsLoading(true);
     await api.delete(`/orders/${selectedOrder?._id}`);
@@ -45,6 +63,12 @@ export const OrdersBoard = ({
     setIsModalVisible(false);
   };
 
+  const handleDeleteCompletedOrder = () => {
+    toast.success(
+      `O pedido finalizado da mesa ${selectedOrder?.table} foi removido da lista!`
+    );
+  };
+
   return (
     <Board>
       {isModalVisible && (
@@ -53,6 +77,8 @@ export const OrdersBoard = ({
           order={selectedOrder}
           handleOpenModal={handleOpenModal}
           onCancelOrder={handleCancelOrder}
+          onDeleteCompletedOrder={handleDeleteCompletedOrder}
+          onChangeOrderStatus={handleChangeOrderStatus}
         />
       )}
 

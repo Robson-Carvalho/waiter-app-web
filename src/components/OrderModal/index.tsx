@@ -10,6 +10,8 @@ interface OrderModalProps {
   handleOpenModal: () => void;
   isLoading: boolean;
   onCancelOrder: () => void;
+  onDeleteCompletedOrder: () => void;
+  onChangeOrderStatus: () => void;
 }
 
 export const OrderModal = ({
@@ -17,6 +19,8 @@ export const OrderModal = ({
   handleOpenModal,
   isLoading,
   onCancelOrder,
+  onChangeOrderStatus,
+  onDeleteCompletedOrder,
 }: OrderModalProps) => {
   const total: number | any = order?.products.reduce(
     (acc, { product: { price }, quantity }) => {
@@ -94,17 +98,34 @@ export const OrderModal = ({
         </OrderDetails>
 
         <Actions>
-          <button type="button" className="primary" disabled={isLoading}>
-            <span>👨‍🍳</span>
-            <strong>Iniciar Produção</strong>
-          </button>
+          {order?.status !== "DONE" && (
+            <button
+              type="button"
+              className="primary"
+              disabled={isLoading}
+              onClick={onChangeOrderStatus}
+            >
+              <span>
+                {order?.status === "WAITING" && "👨‍🍳"}
+                {order?.status === "IN_PRODUCTION" && "✅"}
+              </span>
+              <strong>
+                {order?.status === "WAITING" && "Iniciar Produção"}
+                {order?.status === "IN_PRODUCTION" && "Concluir Pedido"}
+              </strong>
+            </button>
+          )}
           <button
             type="button"
             className="secondary"
-            onClick={onCancelOrder}
+            onClick={
+              order?.status === "DONE" ? onDeleteCompletedOrder : onCancelOrder
+            }
             disabled={isLoading}
           >
-            Cancelar pedido
+            {order?.status !== "DONE"
+              ? "Cancelar pedido"
+              : "Remover pedido concluido"}
           </button>
         </Actions>
       </ModalBody>
