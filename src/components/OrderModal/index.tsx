@@ -115,18 +115,28 @@ export const OrderModal = ({
               </strong>
             </button>
           )}
-          <button
-            type="button"
-            className="secondary"
-            onClick={
-              order?.status === "DONE" ? onDeleteCompletedOrder : onCancelOrder
-            }
-            disabled={isLoading}
-          >
-            {order?.status !== "DONE"
-              ? "Cancelar pedido"
-              : "Remover pedido concluido"}
-          </button>
+
+          {order?.status !== "DONE" && (
+            <button
+              type="button"
+              className="secondary"
+              onClick={onCancelOrder}
+              disabled={isLoading}
+            >
+              Cancelar pedido
+            </button>
+          )}
+
+          {order?.status === "DONE" && (
+            <button
+              type="button"
+              className="secondary"
+              onClick={onDeleteCompletedOrder}
+              disabled={isLoading}
+            >
+              Remover pedido concluido
+            </button>
+          )}
         </Actions>
       </ModalBody>
     </Overlay>

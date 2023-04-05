@@ -32,6 +32,10 @@ export const Orders = () => {
     );
   };
 
+  const handleDeleteCompletedOrder = (orderId: string) => {
+    setOrders((preState) => preState.filter((order) => order._id !== orderId));
+  };
+
   return (
     <Container>
       <OrdersBoard
@@ -54,6 +58,7 @@ export const Orders = () => {
         orders={done}
         onCancelOrder={handleCancelOrder}
         onChangeOrderStatus={handleOrderStatusChange}
+        onDeleteCompletedOrder={handleDeleteCompletedOrder}
       />
     </Container>
   );

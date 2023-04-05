@@ -12,6 +12,7 @@ interface OrdersBoardProps {
   orders: Order[];
   onCancelOrder: (orderId: string) => void;
   onChangeOrderStatus: (orderId: string, status: Order["status"]) => void;
+  onDeleteCompletedOrder?: (orderId: string) => void;
 }
 
 export const OrdersBoard = ({
@@ -20,6 +21,7 @@ export const OrdersBoard = ({
   orders,
   onCancelOrder,
   onChangeOrderStatus,
+  onDeleteCompletedOrder,
 }: OrdersBoardProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<null | Order>(null);
